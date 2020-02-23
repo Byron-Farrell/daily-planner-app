@@ -6,6 +6,8 @@ import { environment } from './environments/environment';
 
 import 'bootstrap';
 
+
+(<any>window).validatePassword;
 if (environment.production) {
   enableProdMode();
 }

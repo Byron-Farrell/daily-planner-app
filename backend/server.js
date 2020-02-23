@@ -1,51 +1,87 @@
+// ============================================
+//                   IMPORTS
+// ============================================
+
+
+// ---------------- EXPRESS-JS ----------------
 import express from 'express';
+
+// ------------ EXPRESS MIDDLEWARE ------------
 import bodyParser from 'body-parser';
+
+// ----------------- DATABASE -----------------
+import MongoClient from 'mongodb';
+
+// ------------------ OTHER -------------------
 import path from 'path';
-import { initializeDatabase } from './database.js'
+import bcrypt from 'bcrypt'; // encryption
 
-// Server port
+
+// ============================================
+//                VARIABLES
+// ============================================
+
+
 const PORT = 3000;
+const DATABASE_URL = 'mongodb://127.0.0.1:27017';
 // Folder containing files from angular after the build process
-const STATIC_FILES_PATHS = path.join(__dirname + '/dist/');
-
+const STATIC_FILES_PATH = path.join(__dirname + '/dist/');
+// ExpressJs object
 const app = express();
+// MongoDB database object
+let db;
 
 
+// ============================================
+//             DATABASE SETUP
+// ============================================
 
-// Connecting to database
-const db = initializeDatabase();
 
-// Static files directories
-app.use(express.static(STATIC_FILES_PATHS));
+MongoClient.connect(DATABASE_URL, (error, client) => {
+  if (error) {
+    return console.log(error);
+  }
 
-// Home page
+  db =  client.db('pan_db');
+});
+
+
+// ============================================
+//                EXPRESS SETUP
+// ============================================
+
+// ------------- Middleware setup -------------
+app.use(express.static(STATIC_FILES_PATH));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// ------------- Routing Setup -------------
+
 app.get('/', function(request, response) {
-  response.sendFile(distFolderPath + 'index.html');
+  response.sendFile(STATIC_FILES_PATH + 'index.html');
 });
 
 app.get('/signup', function(request, response) {
-  response.sendFile(distFolderPath + 'signup.html');
+  response.sendFile(STATIC_FILES_PATH + 'signup.html');
+});
+
+app.post('/signup', function(request, response) {
+  console.log(request.body);
+
+  db.collection("temp").findOne({}, function(err, result) {
+    if (err) throw err;
+    console.log(result);
+  });
+  response.sendFile(STATIC_FILES_PATH + 'signup.html');
 });
 
 app.get('/login', function(request, response) {
-  response.sendFile(distFolderPath + 'login.html');
+  response.sendFile(STATIC_FILES_PATH + 'login.html');
 });
 
-// app.put('/get-diary', function(request, response) => {
-//   response.send('Hello World');
-// })
-//
-// app.put('/create-diary', function(request, response) => {
-//   response.send('Hello World');
-// })
-//
-// app.post('/update-diary', function(request, response) => {
-//   response.send('Hello World');
-// })
-//
-// app.delete('/delete-diary', function(request, response) => {
-//   response.send('Hello World');
-// })
+app.post('/login', function(request, response) {
+  response.sendFile(STATIC_FILES_PATH + 'login.html');
+});
 
-
-app.listen(port, () => console.log(`Listening on port ${PORT}.`));
+// ------------ Starting Server ------------
+app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));

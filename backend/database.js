@@ -15,12 +15,13 @@ const DATABASE_URL = 'mongodb://127.0.0.1:27017';
 //   }
 // }
 
-export async function initializeDatabase() {
+export function initializeDatabase() {
   MongoClient.connect(DATABASE_URL, (error, client) => {
     if (error) {
       return console.log(error);
     }
 
-    return client.db('pan_db');
+    let db = client.db('pan_db');
+    return db;
   })
 }
