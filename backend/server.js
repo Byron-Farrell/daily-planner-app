@@ -59,15 +59,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // ------------- Routing Setup -------------
 
-app.get('/', function(request, response) {
+app.get('/', (request, response) => {
   response.sendFile(STATIC_FILES_PATH + 'index.html');
 });
 
-app.get('/signup', function(request, response) {
+app.get('/signup', (request, response) => {
   response.sendFile(STATIC_FILES_PATH + 'signup.html');
 });
 
-app.post('/signup', function(request, response) {
+app.post('/signup', (request, response) => {
   console.log(request.body);
 
   db.collection("temp").findOne({}, function(err, result) {
@@ -77,11 +77,11 @@ app.post('/signup', function(request, response) {
   response.sendFile(STATIC_FILES_PATH + 'signup.html');
 });
 
-app.get('/login', function(request, response) {
+app.get('/login', (request, response) => {
   response.sendFile(STATIC_FILES_PATH + 'login.html');
 });
 
-app.post('/login', function(request, response) {
+app.post('/login', (request, response) => {
   response.sendFile(STATIC_FILES_PATH + 'login.html');
 });
 
