@@ -68,20 +68,40 @@ app.get('/signup', (request, response) => {
 });
 
 app.post('/signup', (request, response) => {
-  console.log(request.body);
 
-  db.collection("temp").findOne({}, function(err, result) {
-    if (err) throw err;
+  db.collection('user').findOne({username: request.body.username}, (error, result) => {
+    if (error) throw error;
     console.log(result);
+    if (result === null) {
+      bcrypt.hash(request.body.password, 10, (error, hash) => {
+        db.collection('user').insertOne({username: request.body.username, password: hash});
+      });
+
+      response.redirect('/');
+    }
   });
+
   response.sendFile(STATIC_FILES_PATH + 'signup.html');
 });
 
 app.get('/login', (request, response) => {
+
   response.sendFile(STATIC_FILES_PATH + 'login.html');
 });
 
 app.post('/login', (request, response) => {
+  db.collection('user').findOne({username: request.body.username}, (error, result) => {
+    if (error) throw error;
+
+    bcrypt.compare(request.body.password, result.password, (error, match) => {
+      if (error) throw error;
+
+      if (match) {
+        // password match
+        response.redirect('/');
+      }
+    });
+  });
   response.sendFile(STATIC_FILES_PATH + 'login.html');
 });
 
