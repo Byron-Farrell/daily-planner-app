@@ -3,17 +3,20 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import { initializeDatabase } from './database.js'
 
-const app = express();
-const port = 3006;
+// Server port
+const PORT = 3000;
 // Folder containing files from angular after the build process
-const distFolderPath = path.join(__dirname + '/dist/');
+const STATIC_FILES_PATHS = path.join(__dirname + '/dist/');
+
+const app = express();
+
 
 
 // Connecting to database
-initializeDatabase();
+const db = initializeDatabase();
 
 // Static files directories
-app.use(express.static(distFolderPath));
+app.use(express.static(STATIC_FILES_PATHS));
 
 // Home page
 app.get('/', function(request, response) {
@@ -45,4 +48,4 @@ app.get('/login', function(request, response) {
 // })
 
 
-app.listen(port, () => console.log(`Listening on port ${port}.`));
+app.listen(port, () => console.log(`Listening on port ${PORT}.`));
