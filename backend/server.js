@@ -50,7 +50,9 @@ MongoClient.connect(DATABASE_URL, (error, client) => {
 //                EXPRESS SETUP
 // ============================================
 
+
 // ------------- Middleware setup -------------
+
 app.use(express.static(STATIC_FILES_PATH));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -84,4 +86,5 @@ app.post('/login', function(request, response) {
 });
 
 // ------------ Starting Server ------------
+
 app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));
