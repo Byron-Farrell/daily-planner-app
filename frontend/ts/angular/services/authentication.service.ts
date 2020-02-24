@@ -107,10 +107,9 @@ export class AuthenticationService {
   }
 
   public isLoggedIn(): boolean {
-    let user = this.getPayload();
-    console.log(user);
+    let token = this.getToken();
 
-    if (user) {
+    if (token) {
       return true;
     }
     else {

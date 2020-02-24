@@ -29,8 +29,6 @@ export class LoginComponent implements OnInit {
     };
 
     this.auth.login(user).then((json: any) => {
-      console.log(json);
-
       if (json.success) {
         this.router.navigateByUrl('/');
       }
