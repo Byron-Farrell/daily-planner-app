@@ -1,17 +1,24 @@
-<div class="authStyles row m-0">
-  <h1 class="position-absolute w-100 my-4 text-center">Daily Planner</h1>
-  <div class="m-auto col-sm-12 col-md-8 col-lg-6">
-    <div id="loginFormContainer" class="p-4 border-rounded rounded">
-      <h2 class="text-center mb-3">Login</h2>
-      <form action="/login" method="post">
-        <div class="form-group">
-          <input type="text" name="username" class="form-control" placeholder="Username...">
-        </div>
-        <div class="form-group">
-          <input type="password" name="password" class="form-control" placeholder="Password...">
-        </div>
-        <button type="submit" class="btn btn-primary w-100 mt-4">Login</button>
-      </form>
+<div class="bg-dark container-fluid vh-100">
+  <div class="row">
+    <h1 class="w-100 text-center my-5 text-light">Login</h1>
+  </div>
+
+  <div class="row px-2">
+    <div class="bg-light mx-auto col-sm-10 col-md-8 col-lg-5 col-lg-2 align-middle p-4 rounded">
+
+      <div class="form-group">
+        <input type="text" name="username" class="form-control" placeholder="Username...">
+      </div>
+
+      <div class="form-group">
+        <input id="loginPassword" type="password" name="password" class="form-control" placeholder="Password...">
+        <small class="float-right"><a class="form-text text-muted " href='#'>Forgot password?</a></small>
+      </div>
+
+      <button class="btn btn-success w-100 mt-4 mb-2">Login</button>
+      <hr>
+      <button class="btn btn-secondary w-100 mt-2">Sign up</button>
+
     </div>
   </div>
 </div>
