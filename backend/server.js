@@ -63,10 +63,6 @@ app.get('/', (request, response) => {
   response.sendFile(STATIC_FILES_PATH + 'index.html');
 });
 
-app.get('/signup', (request, response) => {
-  response.sendFile(STATIC_FILES_PATH + 'signup.html');
-});
-
 app.post('/signup', (request, response) => {
 
   db.collection('user').findOne({username: request.body.username}, (error, result) => {
@@ -82,11 +78,6 @@ app.post('/signup', (request, response) => {
   });
 
   response.sendFile(STATIC_FILES_PATH + 'signup.html');
-});
-
-app.get('/login', (request, response) => {
-
-  response.sendFile(STATIC_FILES_PATH + 'login.html');
 });
 
 app.post('/login', (request, response) => {
