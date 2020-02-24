@@ -1,33 +1,41 @@
-<div class="authStyles row m-0">
-
-  <h1 class="position-absolute w-100 my-4 text-center">Daily Planner</h1>
-
-  <div class="m-auto col-sm-12 col-md-8 col-lg-6">
-
-    <div id="loginFormContainer" class="p-4 border-rounded rounded">
-
-      <h2 class="text-center mb-3">Signup</h2>
-
-      <form action="/signup" method="post">
-
-        <div class="form-group">
-          <input type="text" name="username" class="form-control" placeholder="Username...">
-        </div>
-
-        <div class="form-group">
-          <input id="password1" type="password" name="password" class="form-control" placeholder="Password...">
-        </div>
-
-        <div class="form-group">
-          <input id="password2" type="password" class="form-control" (onchange)="validatePassword()" placeholder="Verify Password...">
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100 mt-4">Signup</button>
-
-      </form>
-
-    </div>
-
+<div class="bg-dark container-fluid vh-100">
+  <div class="row">
+    <h1 class="w-100 text-center my-5 text-light">Sign Up</h1>
   </div>
 
+  <div class="row px-2">
+    <div class="bg-light mx-auto col-sm-10 col-md-8 col-lg-5 col-lg-2 align-middle p-4 rounded">
+
+      <div class="form-group">
+        <input type="text" name="username" class="form-control" placeholder="Username...">
+      </div>
+
+      <div class="form-group">
+        <input id="password1" type="password" name="password" class="form-control" placeholder="Password...">
+      </div>
+
+      <div class="form-group">
+        <input id="password2" type="password" class="form-control"  placeholder="Confirm Password...">
+      </div>
+
+      <div class="form-group">
+        <div class="dropdown">
+          <label class="text-dark">Secret Question</label>
+          <button class="btn btn-secondary dropdown-toggle w-100 bg-secondary text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ selectedQuestion }}
+          </button>
+          <div class="dropdown-menu w-100"  aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item pointer question" *ngFor="let question of secretQuestions" (click)="selectedQuestion = question">{{ question }}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input id="secretQuestionAnswer" type="text" class="form-control"  placeholder="Answer...">
+      </div>
+
+      <button (click)="validate()" class="btn btn-success w-100 mt-4">Signup</button>
+
+    </div>
+  </div>
 </div>
