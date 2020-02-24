@@ -7,8 +7,11 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { PasswordRecoveryComponent } from './components/auth/password-recovery/password-recovery.component';
 
+import { AuthenticationGuardService } from './services/authentication-guard.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: NavbarComponent, canActivate: [AuthenticationGuardService] },
+  { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'recover-password', component: PasswordRecoveryComponent },
 
@@ -20,6 +23,7 @@ const routes: Routes = [
     LoginComponent,
     SignupComponent,
     PasswordRecoveryComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

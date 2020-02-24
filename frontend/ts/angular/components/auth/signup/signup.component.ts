@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RegistrationDetails } from '../../../interfaces/registration-information-details';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +14,7 @@ export class SignupComponent implements OnInit {
   public selectedQuestion: string;
   public secretQuestions: Array<string>;
 
-  constructor() {
+  constructor(private auth: AuthenticationService, private router: Router) {
     this.errorMessage = '';
   }
 
@@ -24,18 +27,43 @@ export class SignupComponent implements OnInit {
     this.selectedQuestion = this.secretQuestions[0];
   }
 
-  public validate(): void {
-    // reset error messages
-    this.errorMessage = '';
-    this.validatePassword();
-  }
-
-  private validatePassword(): void {
+  private validPassword(): boolean {
     let password1 = <HTMLInputElement> document.getElementById('password1');
     let password2 = <HTMLInputElement> document.getElementById('password2');
 
     if (password1.value !== password2.value) {
       this.errorMessage = 'Passwords don\'t match';
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  public register(): void {
+    if (this.validPassword()) {
+      let username = <HTMLInputElement> document.getElementById('registrationUsername');
+      let password = <HTMLInputElement> document.getElementById('password1');
+      let secretQuestion = this.selectedQuestion;
+      let secretAnswer = <HTMLInputElement> document.getElementById('secretQuestionAnswer');
+
+      let accountDetails: RegistrationDetails = {
+        username: username.value,
+        password: password.value,
+        secretQuestion: secretQuestion,
+        secretAnswer: secretAnswer.value
+      };
+
+      this.auth.register(accountDetails).then((json: any) => {
+        console.log(json);
+
+        if (json.success) {
+          this.router.navigateByUrl('/');
+        }
+        else {
+          this.errorMessage = json.errorMessage;
+        }
+      });
     }
   }
 }
