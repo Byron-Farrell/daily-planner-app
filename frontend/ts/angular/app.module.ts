@@ -4,15 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RootComponent } from './components/root/root.component';
 import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: '', component: SignupComponent },
 ];
 
 @NgModule({
   declarations: [
     RootComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
