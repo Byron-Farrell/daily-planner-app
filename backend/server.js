@@ -16,6 +16,11 @@ import path from 'path';
 import bcrypt from 'bcrypt'; // encryption
 import jwt from 'jsonwebtoken';
 
+// FIXME: MVC
+// Routes
+// Model
+// View? - static files
+// Controller
 
 // ============================================
 //                VARIABLES
