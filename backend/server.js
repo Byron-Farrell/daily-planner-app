@@ -92,7 +92,6 @@ app.post('/signup', (request, response) => {
           'errorMessage': null
         });
       });
-
     }
     else {
       response.status(400);
