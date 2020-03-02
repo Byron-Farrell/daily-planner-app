@@ -77,7 +77,7 @@ app.post('/signup', (request, response) => {
           username: request.body.username,
           password: hash,
           secretQuestion: request.body.secretQuestion,
-          secretAnswer: request.body.secretQuestion
+          secretAnswer: request.body.secretAnswer
         });
 
         db.collection('user').findOne({username: request.body.username}, (error, result) => {
