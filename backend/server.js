@@ -70,32 +70,29 @@ app.post('/signup', (request, response) => {
 
     // Username does not exist
     if (result === null) {
-      bcrypt.hash(request.body.password, 10, (error, hash) => {
-        if (error) throw error;
+      let passwordHash = bcrypt.hashSync(request.body.password, 10);
+      let secretAnswerHash = bcrypt.hashSync(request.body.secretAnswer, 10);
 
-        db.collection('user').insertOne({
-          username: request.body.username,
-          password: hash,
-          secretQuestion: request.body.secretQuestion,
-          secretAnswer: request.body.secretAnswer
-        });
-
-        db.collection('user').findOne({username: request.body.username}, (error, result) => {
-          if (error) throw error;
-          console.log(result);
-          let token = jwt.sign({ id: result._id, username: result.username }, secret_key); // Sigining the token
-
-          response.status(200);
-          response.json({
-            'success': true,
-            'token': token,
-            'errorMessage': null
-          });
-        });
-
-
-
+      db.collection('user').insertOne({
+        username: request.body.username,
+        password: passwordHash,
+        secretQuestion: request.body.secretQuestion,
+        secretAnswer: secretAnswerHash
       });
+
+      db.collection('user').findOne({username: request.body.username}, (error, result) => {
+        if (error) throw error;
+        console.log(result);
+        let token = jwt.sign({ id: result._id, username: result.username }, secret_key); // Sigining the token
+
+        response.status(200);
+        response.json({
+          'success': true,
+          'token': token,
+          'errorMessage': null
+        });
+      });
+
     }
     else {
       response.status(400);
