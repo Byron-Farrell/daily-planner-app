@@ -159,7 +159,7 @@ app.post('/recover', (request, response) => {
           'errorMessage': 'Secret question does not match'
         });
       }
-      else {console.log('match');
+      else {
         bcrypt.compare(request.body.secretAnswer, result.secretAnswer, (error, match) => {
           if (error) throw error;
 
