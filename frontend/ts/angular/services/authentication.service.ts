@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginDetails } from '../interfaces/login-details';
 import { RegistrationDetails } from '../interfaces/registration-information-details';
+import { PasswordRecoveryDetails } from '../interfaces/password-recovery-details';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AuthenticationService {
   static HOST = 'http://127.0.0.1:3000/';
   static LOGIN_URI = 'login';
   static REGISTER_URI = 'signup';
+  static PASSWORD_RECOVERY_URI = 'recover';
 
   private token;
 
@@ -30,6 +32,25 @@ export class AuthenticationService {
   private saveToken(token: string): void {
     localStorage.setItem('mean-token', token);
     this.token = token;
+  }
+
+  public recoverPassword(recoveryDetails: PasswordRecoveryDetails): Promise<any> {
+    const URI = AuthenticationService.HOST + AuthenticationService.PASSWORD_RECOVERY_URI;
+
+    return new Promise((resolve, reject) => {
+      fetch(URI, {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(recoveryDetails)
+      })
+      .then(response => response.json())
+      .then(json => resolve(json))
+      .catch(error => reject(error));
+    });
   }
 
   public register(accountDetails: RegistrationDetails): Promise<any> {

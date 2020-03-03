@@ -143,6 +143,53 @@ app.post('/login', (request, response) => {
   });
 });
 
+app.put('/recover', (request, response) => {
+
+});
+
+app.post('/recover', (request, response) => {
+  db.collection('user').findOne({username: request.body.username}, (error, result) => {
+    if (error) throw error;
+
+    if (result !== null) {
+      if (request.body.secretQuestion !== result.secretQuestion) {
+        response.status(400);
+        response.json({
+          'success': false,
+          'errorMessage': 'Secret question does not match'
+        });
+      }
+      else {console.log('match');
+        bcrypt.compare(request.body.secretAnswer, result.secretAnswer, (error, match) => {
+          if (error) throw error;
+
+          if (match) {
+            response.status(200);
+            response.json({
+              'success': true,
+            })
+          }
+          else {
+            // error
+            respone.status(400);
+            respone.json({
+              'success': false,
+              'errorMessage': 'Secret answer does not match'
+            });
+          }
+        })
+      }
+    }
+    else {
+      response.status(400);
+      response.json({
+        'success': false,
+        'errorMessage': 'Username does not exist'
+      })
+    }
+  })
+})
+
 app.all('*', (request, response) => {
   response.redirect('/');
 });
