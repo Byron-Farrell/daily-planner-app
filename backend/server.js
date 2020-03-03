@@ -82,7 +82,6 @@ app.post('/signup', (request, response) => {
 
       db.collection('user').findOne({username: request.body.username}, (error, result) => {
         if (error) throw error;
-        console.log(result);
         let token = jwt.sign({ id: result._id, username: result.username }, secret_key); // Sigining the token
 
         response.status(200);
@@ -104,8 +103,6 @@ app.post('/signup', (request, response) => {
 });
 
 app.post('/login', (request, response) => {
-  console.log(request.body);
-
   db.collection('user').findOne({username: request.body.username}, (error, result) => {
     if (error) throw error;
 
@@ -115,7 +112,6 @@ app.post('/login', (request, response) => {
         if (error) throw error;
 
         if (match) {
-          console.log(result._id);
           // password match
           let token = jwt.sign({ id: result._id, username: result.username }, secret_key); // Sigining the token
           response.status(200);
@@ -144,7 +140,22 @@ app.post('/login', (request, response) => {
 });
 
 app.put('/recover', (request, response) => {
+  let passwordHash = bcrypt.hashSync(request.body.password, 10);
+  db.collection('user').updateOne(
+    {username: request.body.username},
+    { $set: {password: passwordHash} },
+    (error, result) => {
+      if (error) throw error;
 
+      if (result !== null) {
+        response.status(200);
+      }
+      else {
+        respone.status(400);
+      }
+
+      response.send();
+    })
 });
 
 app.post('/recover', (request, response) => {
@@ -171,8 +182,8 @@ app.post('/recover', (request, response) => {
           }
           else {
             // error
-            respone.status(400);
-            respone.json({
+            response.status(400);
+            response.json({
               'success': false,
               'errorMessage': 'Secret answer does not match'
             });

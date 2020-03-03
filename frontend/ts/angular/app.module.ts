@@ -10,11 +10,13 @@ import { PasswordRecoveryComponent } from './components/auth/password-recovery/p
 import { AuthenticationGuardService } from './services/authentication-guard.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PasswordChangeComponent } from './components/auth/password-change/password-change.component';
+
 const routes: Routes = [
   { path: '', component: NavbarComponent, canActivate: [AuthenticationGuardService] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'recover-password', component: PasswordRecoveryComponent },
+  { path: 'change-password/:username', component: PasswordChangeComponent },
 
 ];
 

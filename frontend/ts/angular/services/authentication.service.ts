@@ -138,4 +138,31 @@ export class AuthenticationService {
     }
   }
 
+  public changePassword(username: string, newPassword: string): Promise<any> {
+    const URI = AuthenticationService.HOST + AuthenticationService.PASSWORD_RECOVERY_URI;
+
+    return new Promise((resolve, reject) => {
+      fetch(URI, {
+        method: 'PUT',
+        mode: 'cors',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          password: newPassword,
+          username: username
+        })
+      })
+      .then(response => {
+        if (response.status === 200) {
+          resolve();
+        }
+        else {
+          reject();
+        }
+      })
+    })
+  }
+
 }

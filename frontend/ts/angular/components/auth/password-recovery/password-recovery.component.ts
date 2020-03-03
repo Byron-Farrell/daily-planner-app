@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PasswordRecoveryDetails } from '../../../interfaces/password-recovery-details';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-password-recovery',
@@ -16,7 +17,7 @@ export class PasswordRecoveryComponent implements OnInit {
   private username: string;
   private secretAnswer: string;
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     this.secretQuestions = [
@@ -71,7 +72,7 @@ export class PasswordRecoveryComponent implements OnInit {
         console.log(json);
 
         if (json.success) {
-          console.log('DONE');
+          this.router.navigateByUrl('/change-password/' + this.username);
         }
         else {
           this.errorMessage = json.errorMessage;
