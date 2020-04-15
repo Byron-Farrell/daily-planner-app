@@ -10,9 +10,12 @@ import { PasswordRecoveryComponent } from './components/auth/password-recovery/p
 import { AuthenticationGuardService } from './services/authentication-guard.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PasswordChangeComponent } from './components/auth/password-change/password-change.component';
+import { DiaryEditorComponent } from './components/diary/diary-editor/diary-editor.component';
+import { DiaryHistoryComponent } from './components/diary/diary-history/diary-history.component';
+import { DiaryViewComponent } from './components/diary/diary-view/diary-view.component';
 
 const routes: Routes = [
-  { path: '', component: NavbarComponent, canActivate: [AuthenticationGuardService] },
+  { path: '', component: DiaryViewComponent, canActivate: [AuthenticationGuardService] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'recover-password', component: PasswordRecoveryComponent },
@@ -28,6 +31,9 @@ const routes: Routes = [
     PasswordRecoveryComponent,
     NavbarComponent,
     PasswordChangeComponent,
+    DiaryEditorComponent,
+    DiaryHistoryComponent,
+    DiaryViewComponent,
   ],
   imports: [
     BrowserModule,
