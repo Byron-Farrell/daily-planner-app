@@ -10,7 +10,6 @@ export function checkToken(request, response, next) {
     request.token = token;
     next();
   } else {
-    //If header is undefined return Forbidden (403)
     response.sendStatus(403)
   }
 }

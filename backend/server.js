@@ -64,32 +64,62 @@ app.get('/', (request, response) => {
   response.sendFile(STATIC_FILES_PATH + 'index.html');
 });
 
-app.post('/diary', [checkToken, verifyToken], (request, response) => {
-  db.collection('diary').findOne({title: request.body.title}, (error, result) => {
+app.get('/diary', [checkToken, verifyToken], (request, response) => {
+  db.collection('user').findOne({username: request.authorizedData.username}, (error, result) => {
     if (error) throw error;
 
-    // Title does not exist
+    // Username does not exist
     if (result === null) {
-
-      db.collection('diary').insertOne({
-        title: request.body.title,
-        content: request.body.content,
+      response.status(400);
+      response.json({
+        'success': false,
+        'errorMessage': 'Username does not exist'
       });
+    }
+    else {
+      response.status(200);
+      response.json({
+        'success': true,
+        'errorMessage': null,
+        'diaries': result.diary
+      });
+    }
+
+  })
+})
+
+app.post('/diary', [checkToken, verifyToken], (request, response) => {
+  db.collection('user').findOne({'username': request.authorizedData.username},{'projection':{'diary': {$elemMatch: {'title': request.body.title}}}}, (error, result) => {
+    if (result.diary !== undefined) {
+      response.status(400);
+      response.json({
+        'success': false,
+        'errorMessage': 'Title already exists'
+      });
+    }
+    else {
+      db.collection('user').updateOne(
+        {username: request.authorizedData.username},
+        {
+          $push: {
+            'diary': {
+              'title': request.body.title,
+              'content': request.body.content
+            },
+          }
+        }, (error, result) => {
+
+        if (error) throw error;
 
         response.status(200);
         response.json({
           'success': true,
           'errorMessage': null
         });
-    }
-    else {
-      response.status(400);
-      response.json({
-        'success': false,
-        'errorMessage': 'Title already exists'
-      })
+      });
     }
   });
+
 });
 
 app.post('/signup', (request, response) => {

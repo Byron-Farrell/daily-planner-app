@@ -1,13 +1,12 @@
 <div class="h-100">
-  <h3 id="diaryTitle" class="text-primary text-center mb-5">Title</h3>
+  <h2 id="diaryTitle" class="text-primary text-center mb-5">{{title}}</h2>
 
   <div class="bg-light border border-primary rounded p-3" contenteditable="">
-    update del create get
+    {{content}}
   </div>
   <div class="w-100 pt-2">
     <button class="btn btn-info mr-2">Update</button>
     <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDiaryModal">Delete</button>
-    <button class="btn btn-success float-right" routerLink="/create">Create</button>
   </div>
 
 </div>
@@ -18,7 +17,7 @@
       <div class="modal-header border-0">
       </div>
       <div>
-        <h4 class="text-warning text-center">Are you sure you want to delete this diary.</h4>
+        <h5 class="text-danger text-center">Are you sure you want to delete this diary.</h5>
       </div>
       <div class="modal-footer border-0">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

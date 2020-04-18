@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-diary-editor',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./diary-editor.component.scss']
 })
 export class DiaryEditorComponent implements OnInit {
+
+  @Input() title: string;
+  @Input() content: string;
 
   constructor() { }
 

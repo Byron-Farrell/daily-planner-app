@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DiaryService } from '../../../services/diary.service';
 
 @Component({
   selector: 'app-diary-view',
@@ -8,12 +9,34 @@ import { Component, OnInit } from '@angular/core';
 export class DiaryViewComponent implements OnInit {
 
   private toggle: boolean;
+  public diaries: any;
+  public selectedDiary: any;
 
-  constructor() {
+  constructor(private diaryService: DiaryService) {
     this.toggle = true;
+    this.selectedDiary = {
+      'title': '',
+      'content': ''
+    }
   }
 
   ngOnInit() {
+    this.diaryService.get().then(json => {
+      this.diaries = json.diaries;
+      if (json.diaries.length > 0) {
+        this.selectedDiary.title = json.diaries[0].title;
+        this.selectedDiary.content = json.diaries[0].content;
+      }
+    });
+  }
+
+  public updateDiary(title: string) {
+    this.diaries.forEach(diary => {
+      if (diary.title === title) {
+        this.selectedDiary.title = diary.title;
+        this.selectedDiary.content = diary.content;
+      }
+    })
   }
 
   public toggleSidePanel(event: any) {

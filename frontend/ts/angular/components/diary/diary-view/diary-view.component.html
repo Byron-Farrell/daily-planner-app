@@ -1,9 +1,16 @@
 
 <div class="row m-0 h-100">
-  <div id="DiarySidePanel" class="bg-light border-right p-4 col-lg-2 h-100">
-    <h1 class="w-100 m-0">
+  <div id="DiarySidePanel" class="bg-light border-right p-3 col-lg-2 h-100">
+    <h1 class="w-100 m-0 d-inline-block">
       <i id="HideSidePanel" (click)="toggleSidePanel($event)" class="text-dark pointer fas fa-angle-left float-right"></i>
     </h1>
+
+    <div (click)="updateDiary(diary.title)" *ngFor="let diary of diaries" class="rounded pl-3 py-1 diary w-100 pointer">
+      <h4 class="m-0">{{diary.title}}</h4>
+    </div>
+
+    <button class="btn btn-success w-100 mt-5" routerLink="/create">Create</button>
+
   </div>
 
   <div id="DiaryMainContent" class="bg-white m-0 p-4 col-lg-10">
@@ -11,6 +18,9 @@
       <i id="ExpandSidePanel" (click)="toggleSidePanel($event)" class="d-none"></i>
     </h1>
 
-    <app-diary-editor></app-diary-editor>
+    <app-diary-editor
+      [(title)]="selectedDiary.title"
+      [content]="selectedDiary.content"
+    ></app-diary-editor>
   </div>
 </div>
