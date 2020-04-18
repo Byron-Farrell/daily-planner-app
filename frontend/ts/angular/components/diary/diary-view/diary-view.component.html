@@ -1,12 +1,16 @@
 
 <div class="row m-0 h-100">
-  <div id="DiarySidePanel" class="bg-dark p-4 col-lg-2 h-100">
-    <div class="w-100">
-      <i class="fas fa-angle-left float-right"></i>
-    </div>
+  <div id="DiarySidePanel" class="bg-light border-right p-4 col-lg-2 h-100">
+    <h1 class="w-100 m-0">
+      <i id="HideSidePanel" (click)="toggleSidePanel($event)" class="text-dark pointer fas fa-angle-left float-right"></i>
+    </h1>
   </div>
 
-  <div id="DiaryMainContent" class="bg-white p-4 col-lg-10">
-    2
+  <div id="DiaryMainContent" class="bg-white m-0 p-4 col-lg-10">
+    <h1 class="m-0 position-absolute">
+      <i id="ExpandSidePanel" (click)="toggleSidePanel($event)" class="d-none"></i>
+    </h1>
+
+    <app-diary-editor></app-diary-editor>
   </div>
 </div>

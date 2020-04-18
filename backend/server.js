@@ -15,6 +15,7 @@ import MongoClient from 'mongodb';
 import path from 'path';
 import bcrypt from 'bcrypt'; // encryption
 import jwt from 'jsonwebtoken';
+import { checkToken, verifyToken } from './handlers.js'
 
 // FIXME: MVC
 // Routes
@@ -61,6 +62,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // -------------- Routing setup ---------------
 app.get('/', (request, response) => {
   response.sendFile(STATIC_FILES_PATH + 'index.html');
+});
+
+app.post('/diary', [checkToken, verifyToken], (request, response) => {
+  db.collection('diary').findOne({title: request.body.title}, (error, result) => {
+    if (error) throw error;
+
+    // Title does not exist
+    if (result === null) {
+
+      db.collection('diary').insertOne({
+        title: request.body.title,
+        content: request.body.content,
+      });
+
+        response.status(200);
+        response.json({
+          'success': true,
+          'errorMessage': null
+        });
+    }
+    else {
+      response.status(400);
+      response.json({
+        'success': false,
+        'errorMessage': 'Title already exists'
+      })
+    }
+  });
 });
 
 app.post('/signup', (request, response) => {
