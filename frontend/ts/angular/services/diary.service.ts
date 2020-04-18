@@ -76,4 +76,27 @@ export class DiaryService {
       .catch(error => reject(error));
     });
   }
+
+  public delete(title: string): Promise<any> {
+    const URI = AuthenticationService.HOST + this.DIARY_URI;
+    let token = this.auth.getToken();
+
+    return new Promise((resolve, reject) => {
+      fetch(URI, {
+        method: 'DELETE',
+        mode: 'cors',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'bearer ' + token
+        },
+        body: JSON.stringify({
+          'title': title,
+        })
+      })
+      .then(response => response.json())
+      .then(json => resolve(json))
+      .catch(error => reject(error));
+    });
+  }
 }

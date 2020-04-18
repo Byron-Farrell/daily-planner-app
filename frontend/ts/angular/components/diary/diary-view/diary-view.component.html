@@ -21,6 +21,7 @@
     <app-diary-editor
       [(title)]="selectedDiary.title"
       [content]="selectedDiary.content"
+      (diaryDeleted)="loadDiaries()"
     ></app-diary-editor>
   </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DiaryService } from '../../../services/diary.service';
 
 @Component({
   selector: 'app-diary-editor',
@@ -9,10 +10,18 @@ export class DiaryEditorComponent implements OnInit {
 
   @Input() title: string;
   @Input() content: string;
+  @Output() diaryDeleted = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(private diaryService: DiaryService) { }
 
   ngOnInit() {
   }
 
+  public deleteDiary(): void {
+    this.diaryService.delete(this.title).then(json => {
+      if (json.success) {
+        this.diaryDeleted.emit();
+      }
+    })
+  }
 }

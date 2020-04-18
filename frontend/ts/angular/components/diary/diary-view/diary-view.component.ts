@@ -21,6 +21,10 @@ export class DiaryViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadDiaries();
+  }
+
+  public loadDiaries(): void {
     this.diaryService.get().then(json => {
       this.diaries = json.diaries;
       if (json.diaries.length > 0) {
