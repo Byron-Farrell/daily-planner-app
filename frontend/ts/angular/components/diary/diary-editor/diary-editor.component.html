@@ -5,9 +5,9 @@
     <div class="bg-light border border-primary rounded p-3" contenteditable="">
       {{content}}
     </div>
-    <div class="w-100 pt-2">
-      <button class="btn btn-info mr-2">Update</button>
-      <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDiaryModal">Delete</button>
+    <div class="w-100 pt-3 row m-0">
+      <button class="btn btn-info mr-lg-3 mb-3 col-md-12 col-lg-3">Update</button>
+      <button class="btn btn-danger col-md-12 mb-3 col-lg-3" data-toggle="modal" data-target="#deleteDiaryModal">Delete</button>
     </div>
   </div>
   <div *ngIf="title == ''" class="h-100 d-flex flex-row">

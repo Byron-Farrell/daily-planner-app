@@ -29,7 +29,7 @@ export class DiaryViewComponent implements OnInit {
       'title': '',
       'content': ''
     }
-    
+
     this.diaryService.get().then(json => {
       this.diaries = json.diaries;
       if (json.diaries.length > 0) {
@@ -62,8 +62,8 @@ export class DiaryViewComponent implements OnInit {
       this.toggle = !this.toggle;
     }
     else {
-      sidePanel.className = 'bg-light border-right p-4 col-lg-2 h-100';
-      content.className = 'bg-white p-4 col-lg-10';
+      sidePanel.className = 'bg-light border-right p-4 col-md-4 col-lg-3 h-100';
+      content.className = 'bg-white p-4 col-md-8 col-lg-9';
       expand.className = 'd-none';
       this.toggle = !this.toggle;
 
