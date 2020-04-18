@@ -25,6 +25,11 @@ export class DiaryViewComponent implements OnInit {
   }
 
   public loadDiaries(): void {
+    this.selectedDiary = {
+      'title': '',
+      'content': ''
+    }
+    
     this.diaryService.get().then(json => {
       this.diaries = json.diaries;
       if (json.diaries.length > 0) {

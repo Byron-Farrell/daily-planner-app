@@ -1,14 +1,18 @@
 <div class="h-100">
-  <h2 id="diaryTitle" class="text-primary text-center mb-5">{{title}}</h2>
+  <div *ngIf="title !== ''">
+    <h2 id="diaryTitle" class="text-primary text-center mb-5">{{title}}</h2>
 
-  <div class="bg-light border border-primary rounded p-3" contenteditable="">
-    {{content}}
+    <div class="bg-light border border-primary rounded p-3" contenteditable="">
+      {{content}}
+    </div>
+    <div class="w-100 pt-2">
+      <button class="btn btn-info mr-2">Update</button>
+      <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDiaryModal">Delete</button>
+    </div>
   </div>
-  <div class="w-100 pt-2">
-    <button class="btn btn-info mr-2">Update</button>
-    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDiaryModal">Delete</button>
+  <div *ngIf="title == ''" class="h-100 d-flex flex-row">
+    <h2 class="text-info text-center w-100 align-self-center">No Diaries!</h2>
   </div>
-
 </div>
 
 <div id="deleteDiaryModal" class="modal" tabindex="-1" role="dialog">
