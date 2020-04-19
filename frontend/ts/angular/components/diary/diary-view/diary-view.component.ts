@@ -58,7 +58,7 @@ export class DiaryViewComponent implements OnInit {
     if (this.toggle) {
       content.className = 'bg-white m-0 p-4 col-lg-12';
       sidePanel.className = 'd-none';
-      expand.className = 'fas fa-angle-right pointer text-dark';
+      expand.className = 'text-success fas fa-angle-right pointer';
       this.toggle = !this.toggle;
     }
     else {

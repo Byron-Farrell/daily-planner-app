@@ -2,7 +2,7 @@
 <div class="row m-0 h-100">
   <div id="DiarySidePanel" class="bg-light border-right p-3 col-md-4 col-lg-3 h-100">
     <h1 class="w-100 m-0 d-inline-block">
-      <i id="HideSidePanel" (click)="toggleSidePanel($event)" class="text-dark pointer fas fa-angle-left float-right"></i>
+      <i id="HideSidePanel" (click)="toggleSidePanel($event)" class="text-danger pointer fas fa-angle-left float-right"></i>
     </h1>
 
     <div (click)="updateDiary(diary.title)" *ngFor="let diary of diaries" class="text-primary rounded pl-3 py-1 diary w-100 pointer">
