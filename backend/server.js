@@ -42,7 +42,7 @@ MongoClient.connect(DATABASE_URL, (error, client) => {
     return console.log(error);
   }
 
-  db =  client.db('pan_db');
+  db =  client.db('DB');
 });
 
 // ============================================
