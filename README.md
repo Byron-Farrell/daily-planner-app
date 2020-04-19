@@ -5,7 +5,7 @@ This assignment was developed using Ubuntu. Below are instructions on how to ins
 
 ## Setup
 
-### Run the following commands in the root folder
+#### Run the following commands in the root folder
 
 >$ npm install
 
