@@ -8,15 +8,15 @@
   </div>
 
   <div *ngIf="title !== ''">
-    <h2 id="diaryTitle" class="text-primary text-center mb-5">{{title}}</h2>
+    <h2 id="diaryTitle" class="text-light text-center mb-5">{{title}}</h2>
 
-    <textarea id="contentBox" (change)="updateContent()" class="w-100 bg-light border border-primary rounded p-3" contenteditable="">{{content}}</textarea>
+    <textarea id="contentBox" (change)="updateContent()" class="w-100 text-light bg-dark-grey border-0 rounded p-3" contenteditable="">{{content}}</textarea>
 
     <div class="w-100 pt-3 row m-0">
       <button (click)="updateDiary()" class="btn btn-info mr-lg-3 mb-3 col-md-12 col-lg-3">Update</button>
       <button class="btn btn-danger col-md-12 mb-3 col-lg-3" data-toggle="modal" data-target="#deleteDiaryModal">Delete</button>
     </div>
-    
+
   </div>
   <div *ngIf="title == ''" class="h-100 d-flex flex-row">
     <h2 class="text-info text-center w-100 align-self-center">No Diaries!</h2>
@@ -25,7 +25,7 @@
 
 <div id="deleteDiaryModal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content bg-light">
       <div class="modal-header border-0">
       </div>
       <div>

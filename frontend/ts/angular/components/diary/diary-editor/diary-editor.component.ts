@@ -19,7 +19,8 @@ export class DiaryEditorComponent implements OnInit {
   }
 
   public updateContent(): void {
-    this.content = <HTMLInputElement> document.getElementById('contentBox').value;
+    let elem = <HTMLInputElement> document.getElementById('contentBox');
+    this.content = elem.value;
   }
 
   public updateDiary(): void {

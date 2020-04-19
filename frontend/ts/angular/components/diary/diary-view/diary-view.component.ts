@@ -56,14 +56,14 @@ export class DiaryViewComponent implements OnInit {
     let hide = document.getElementById('HideSidePanel');
 
     if (this.toggle) {
-      content.className = 'bg-white m-0 p-4 col-lg-12';
+      content.className = 'bg-secondary m-0 p-4 col-lg-12';
       sidePanel.className = 'd-none';
       expand.className = 'text-success fas fa-angle-right pointer';
       this.toggle = !this.toggle;
     }
     else {
-      sidePanel.className = 'bg-light border-right p-4 col-md-4 col-lg-3 h-100';
-      content.className = 'bg-white p-4 col-md-8 col-lg-9';
+      sidePanel.className = 'bg-dark-grey p-4 col-md-4 col-lg-3 h-100';
+      content.className = 'bg-secondary p-4 col-md-8 col-lg-9';
       expand.className = 'd-none';
       this.toggle = !this.toggle;
 

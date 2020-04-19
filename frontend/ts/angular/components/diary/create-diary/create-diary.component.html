@@ -1,4 +1,4 @@
-<div class="p-4 h-100">
+<div class="p-4 h-100 bg-secondary">
 
   <div id="newDiaryErrorAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong id="newDiaryError"></strong>
@@ -14,10 +14,10 @@
     </button>
   </div>
 
-  <h3>Title</h3>
-  <input id="diaryTitle" class="w-100 bg-light border border-primary rounded p-3 m-0 mb-4" placeholder="Enter diary title..." type="text" name="" value="">
-  <h3>Diary</h3>
-  <textarea id="diaryContent" placeholder="Enter diary content..." class=" w-100 bg-light border border-primary rounded p-3 m-0 overflow-auto" contenteditable=""></textarea>
-  <button id="createButton" (click)="createDiary()" class="float-right btn btn-success mt-3" type="button" name="button">create</button>
+  <h3 class="text-light">Title</h3>
+  <input id="diaryTitle" class="text-light w-100 bg-dark-grey border-0 rounded p-3 m-0 mb-4" placeholder="Enter diary title..." type="text" name="" value="">
+  <h3 class="text-light">Diary</h3>
+  <textarea id="diaryContent" placeholder="Enter diary content..." class="text-light w-100 bg-dark-grey border-0 rounded p-3 m-0 overflow-auto" contenteditable=""></textarea>
+  <button id="createButton" (click)="createDiary()" class="col-lg-2 col-md-3 col-sm-12 float-right btn btn-success mt-3" type="button" name="button">create</button>
 
 </div>
