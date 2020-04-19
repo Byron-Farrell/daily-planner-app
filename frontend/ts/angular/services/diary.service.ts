@@ -33,6 +33,30 @@ export class DiaryService {
     return null;
   }
 
+  public update(title: string, content: string): Promise<any> {
+    const URI = AuthenticationService.HOST + this.DIARY_URI;
+    let token = this.auth.getToken();
+
+    return new Promise((resolve, reject) => {
+      fetch(URI, {
+        method: 'PUT',
+        mode: 'cors',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'bearer ' + token
+        },
+        body: JSON.stringify({
+          'title': title,
+          'content': content
+        })
+      })
+      .then(response => response.json())
+      .then(json => resolve(json))
+      .catch(error => reject(error));
+    });
+  }
+
   public create(title: string, content: string): Promise<any> {
     const URI = AuthenticationService.HOST + this.DIARY_URI;
     let token = this.auth.getToken();

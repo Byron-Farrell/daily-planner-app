@@ -64,6 +64,27 @@ app.get('/', (request, response) => {
   response.sendFile(STATIC_FILES_PATH + 'index.html');
 });
 
+app.put('/diary', [checkToken, verifyToken], (request, response) => {
+  db.collection('user').updateOne(
+    {
+      username: request.authorizedData.username,
+      'diary': {
+        $elemMatch: {'title': request.body.title}
+      }
+    },
+    {$set: {'diary': [{'title': request.body.title, 'content': request.body.content}]}},
+    (error, result) => {
+
+    if (error) throw error;
+
+    response.status(200);
+    response.json({
+      'success': true,
+      'errorMessage': null
+    });
+  });
+});
+
 app.delete('/diary', [checkToken, verifyToken], (request, response) => {
   db.collection('user').updateOne(
     {username: request.authorizedData.username},

@@ -5,7 +5,7 @@
       <i id="HideSidePanel" (click)="toggleSidePanel($event)" class="text-dark pointer fas fa-angle-left float-right"></i>
     </h1>
 
-    <div (click)="updateDiary(diary.title)" *ngFor="let diary of diaries" class="rounded pl-3 py-1 diary w-100 pointer">
+    <div (click)="updateDiary(diary.title)" *ngFor="let diary of diaries" class="text-primary rounded pl-3 py-1 diary w-100 pointer">
       <h4 class="m-0">{{diary.title}}</h4>
     </div>
 
@@ -20,8 +20,8 @@
 
     <app-diary-editor
       [(title)]="selectedDiary.title"
-      [content]="selectedDiary.content"
-      (diaryDeleted)="loadDiaries()"
+      [(content)]="selectedDiary.content"
+      (reloadDiary)="loadDiaries()"
     ></app-diary-editor>
   </div>
 </div>

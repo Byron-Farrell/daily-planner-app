@@ -14,10 +14,25 @@ import { DiaryEditorComponent } from './components/diary/diary-editor/diary-edit
 import { DiaryHistoryComponent } from './components/diary/diary-history/diary-history.component';
 import { DiaryViewComponent } from './components/diary/diary-view/diary-view.component';
 import { CreateDiaryComponent } from './components/diary/create-diary/create-diary.component';
+import { HomeRootComponent } from './components/home-root/home-root.component';
 
 const routes: Routes = [
-  { path: '', component: DiaryViewComponent, canActivate: [AuthenticationGuardService] },
-  { path: 'create', component: CreateDiaryComponent, canActivate: [AuthenticationGuardService] },
+  {
+    path: '', component: HomeRootComponent,
+    canActivate: [AuthenticationGuardService],
+    children: [
+      {
+        path: '',
+        component: DiaryViewComponent,
+        canActivate: [AuthenticationGuardService]
+      },
+      {
+        path: 'create',
+        component: CreateDiaryComponent,
+        canActivate: [AuthenticationGuardService]
+      }
+    ]
+  },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'recover-password', component: PasswordRecoveryComponent },
@@ -37,6 +52,7 @@ const routes: Routes = [
     DiaryHistoryComponent,
     DiaryViewComponent,
     CreateDiaryComponent,
+    HomeRootComponent,
   ],
   imports: [
     BrowserModule,

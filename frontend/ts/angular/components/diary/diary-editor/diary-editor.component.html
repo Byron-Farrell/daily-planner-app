@@ -1,14 +1,22 @@
 <div class="h-100">
+
+  <div id="updateSuccessAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong id="newDiarySuccess">Update successful!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
   <div *ngIf="title !== ''">
     <h2 id="diaryTitle" class="text-primary text-center mb-5">{{title}}</h2>
 
-    <div class="bg-light border border-primary rounded p-3" contenteditable="">
-      {{content}}
-    </div>
+    <textarea id="contentBox" (change)="updateContent()" class="w-100 bg-light border border-primary rounded p-3" contenteditable="">{{content}}</textarea>
+
     <div class="w-100 pt-3 row m-0">
-      <button class="btn btn-info mr-lg-3 mb-3 col-md-12 col-lg-3">Update</button>
+      <button (click)="updateDiary()" class="btn btn-info mr-lg-3 mb-3 col-md-12 col-lg-3">Update</button>
       <button class="btn btn-danger col-md-12 mb-3 col-lg-3" data-toggle="modal" data-target="#deleteDiaryModal">Delete</button>
     </div>
+    
   </div>
   <div *ngIf="title == ''" class="h-100 d-flex flex-row">
     <h2 class="text-info text-center w-100 align-self-center">No Diaries!</h2>
@@ -29,3 +37,4 @@
       </div>
     </div>
   </div>
+</div>

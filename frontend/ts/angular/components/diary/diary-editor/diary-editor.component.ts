@@ -10,17 +10,33 @@ export class DiaryEditorComponent implements OnInit {
 
   @Input() title: string;
   @Input() content: string;
-  @Output() diaryDeleted = new EventEmitter<void>();
+  @Output() reloadDiary = new EventEmitter<void>();
 
   constructor(private diaryService: DiaryService) { }
 
   ngOnInit() {
+    document.getElementById('updateSuccessAlert').style.display = 'none';
+  }
+
+  public updateContent(): void {
+    this.content = <HTMLInputElement> document.getElementById('contentBox').value;
+  }
+
+  public updateDiary(): void {
+    console.log(this.content);
+
+    this.diaryService.update(this.title, this.content)
+      .then(json => {
+        if (json.success) {
+          document.getElementById('updateSuccessAlert').style.display = 'block';
+        }
+      })
   }
 
   public deleteDiary(): void {
     this.diaryService.delete(this.title).then(json => {
       if (json.success) {
-        this.diaryDeleted.emit();
+        this.reloadDiary.emit();
       }
     })
   }
