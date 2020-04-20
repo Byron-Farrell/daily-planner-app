@@ -1,5 +1,4 @@
-# daily-planner-app
-Enterprise application development assignment
+# Enterprise Application Development Assignment
 
 This assignment was developed using Ubuntu. Below are instructions on how to install it on a debian operating system.
 
