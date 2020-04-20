@@ -14,7 +14,7 @@ to install NPM run the following command in your terminal.
 
 >$ sudo apt install nodejs
 
-#### Run the following commands in the root folder
+#### Run the following commands in the projects root folder
 
 >$ npm install
 
